@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+ <appSettings>
+    <add key="Setting1" value="Very" />
+    <add key="Setting2" value="Easy" />
+ </appSettings>
+</configuration>
+
+**********************************************
+
+File configFile = new File("config.properties");
+ 
+try {
+    FileReader reader = new FileReader(configFile);
+    Properties props = new Properties();
+    props.load(reader);
+ 
+    String host = props.getProperty("host");
+ 
+    System.out.print("Host name is: " + host);
+    reader.close();
+} catch (FileNotFoundException ex) {
+    // file does not exist
+} catch (IOException ex) {
+    // I/O error
+}
+
+
+*********************************************
+
+File configFile = new File("config.properties");
+ 
+try {
+    Properties props = new Properties();
+    props.setProperty("host", "www.codejava.net");
+    FileWriter writer = new FileWriter(configFile);
+    props.store(writer, "host settings");
+    writer.close();
+} catch (FileNotFoundException ex) {
+    // file does not exist
+} catch (IOException ex) {
+    // I/O error
+}
+
+
+*****************************************************
+
+
+
+Properties defaultProps = new Properties();
+// set default properties...
+ 
+// create main Properties object
+Properties props = new Properties(defaultProps);
+ 
+*****************************************************
+ 
+File configFile = new File("config.properties");
+ 
+FileReader reader = new FileReader(configFile);
+ 
+Properties props = new Properties();
+ 
+// load the properties file:
+props.load(reader);
+ 
+*******************************************************
+
+
+
+File configFile = new File("config.properties");
+InputStream inputStream = new FileInputStream(configFile);
+Properties props = new Properties();
+ 
+props.load(inputStream);
+ 
+
+
+props.loadFromXML(reader);
+ 
+
+Or
+
+ 
+props.loadFromXML(inputStream);
+ 
+***************************************************************
+ 
+InputStream inputStream = MyProgram.class.getResourceAsStream("/net/codejava/config/config.properties");
+Properties props = new Properties();
+props.load(inputStream);
+
+************************************************************************************************************
+
+
+
+reader.close();
+ 
+ 
+Or
+
+ 
+inputStream.close();
+
+***********************************
+
+
+
+String host = props.getProperty("host");
+ 
+ 
+ 
+String host = props.getProperty("host", "localhost");
+
+********************************************************
+
+Object setProperty(String key, String value)
+
+
+ 
+props.setProperty("host", "www.codejava.net");
+
+****************************************************
+
+
+
+File configFile = new File("config.properties");
+FileWriter writer = new FileWriter(configFile);
+props.store(writer, "host settings");
+ 
+Save to XML file using an OutputStream object:
+
+ 
+File configFile = new File("config.xml");
+OutputStream outputStream = new FileOutputStream(configFile);
+props.storeToXML(outputStream, "host settings");
+ 
+ 
+writer.close();
+ 
+ Or
+
+ 
+outputStream.close();
+
+***************************************************************
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+

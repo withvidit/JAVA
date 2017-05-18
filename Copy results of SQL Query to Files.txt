@@ -1,0 +1,85 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Main {
+  public static void main(String[] args) throws Exception {
+    Connection conn = getConnection();
+    Statement st = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_UPDATABLE);
+
+    st.executeUpdate("create table survey (id int,name varchar(30));");
+    st.executeUpdate("insert into survey (id,name ) values (1,'nameValue')");
+    st.executeUpdate("insert into survey (id,name ) values (2,null)");
+    st = conn.createStatement();
+    ResultSet rs = st.executeQuery("SELECT * FROM survey");
+
+    // extract data from the ResultSet
+    while (rs.next()) {
+      int id = rs.getInt(1);
+      System.out.println("id=" + id);
+      String name = rs.getString(2);
+      System.out.println("name=" + name);
+      if (rs.wasNull()) {
+        System.out.println("name is null");
+      } else {
+        System.out.println("name is not null");
+      }
+      System.out.println("---------------");
+    }
+    rs.close();
+    st.close();
+    conn.close();
+
+  }
+
+  private static Connection getConnection() throws Exception {
+    Class.forName("org.hsqldb.jdbcDriver");
+    String url = "jdbc:hsqldb:mem:data/tutorial";
+
+    return DriverManager.getConnection(url, "sa", "");
+  }
+}
+
+
+****************************************************************************************
+
+public Users addData(Data data) throws UsersException {
+
+                                Connection con = null;
+
+                                try {
+                                                con = DBUtil.getConnection();
+                                                String query123 = "insert into OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0;Database=D:\testing.xlsx;', 'SELECT * FROM [Sheet1$]') select * from TABLE_NAME";
+                                                PreparedStatement pstm = con.prepareStatement(query);
+                                                int result = pstm.executeUpdate();
+                                                                if (result> 0 ){
+                                                                return data;
+                                                                system.out.println("Data successfully submitted to excel file !!!!");
+                                                }
+                                                else{
+                                                                return null;
+                                                                system.out.println("Can't fetch the Data !!!!");
+
+                                                }
+                                } catch (ClassNotFoundException | SQLException e) {
+                                                e.printStackTrace();
+                                                throw new UserMasterException("Error in fetching Data !!!!");
+
+                                }
+
+                                finally {
+                                                try {
+                                                                con.close();
+                                                                system.out.println("Connection successfully closed for query123 !!!!");
+                                                } catch (SQLException e) {
+                                                e.printStackTrace();
+                                                throw new UserMasterException("Error in closing connection for query123 !!!!");
+                                                }
+                                
+                                }
+                }
+}
+
+

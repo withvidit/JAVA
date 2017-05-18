@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ <configuration>
+ <configSections>
+ <sectionGroup name="mygroup">
+ <section name="mySection"
+ type="System.Configuration.SingleTagSectionHandler, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+ </sectionGroup>
+ </configSections>
+ <mygroup>
+ <mySection scheme="sharedmem" 
+ jvm="C:\Programme\Java\jdk1.6.0_07\jre\bin\client\jvm.dll"
+ classpath="shrimp.jar" />
+ </mySection>
+ </configuration>
